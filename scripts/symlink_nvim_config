@@ -1,0 +1,21 @@
+#!/bin/bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd -P)"
+DOTFILE_NVIM_PATH="$(realpath ${SCRIPT_DIR}/../nvim)"
+
+if [[ -z "${XDG_CONFIG_HOME}" ]]; then
+    echo "XDG_CONFIG_HOME not set or empty. Add XDG_* envvars to .bashrc or .zshrc"
+    exit 1
+fi
+
+# If ${XDG_CONFIG_HOME}/nvim exists AND is non-empty, give a chance to clean it up/backup existing files
+if [ -d "${XDG_CONFIG_HOME}/nvim" ] && [ -n "$(find "${XDG_CONFIG_HOME}/nvim" -maxdepth 0 -empty -exec echo "empty" \;)" ]; then
+    echo "Target directory at ${XDG_CONFIG_HOME}/nvim is non-empty. Check and backup contents before linking to ${DOTFILE_NVIM_PATH}. Exiting..."
+    exit 1
+fi
+
+echo "linking ${XDG_CONFIG_HOME} -> ${DOTFILE_NVIM_PATH} ..."
+
+# Create ${XDG_CONFIG_HOME}/nvim if it doesn't exist. Symlinking will fail if the link already exists.
+ln -sn "${DOTFILE_NVIM_PATH}" "${XDG_CONFIG_HOME}/nvim"
