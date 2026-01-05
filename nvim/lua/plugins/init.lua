@@ -49,5 +49,15 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 --
 require("plugins.treesitter")
 
+-- Load which-key
+--
+--
+require("plugins.which-key")
 
+-- NvimTree
+-- Add autocmds to highlight file in explorer when a new buffer is opened/switched to
+-- Configure static buffer window / element on left
+
+
+-- fzf-lua
 
