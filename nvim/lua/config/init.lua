@@ -77,13 +77,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Enable LSP servers
 vim.lsp.enable({
   -- "basedpyright", -- Python
-  "bashls", -- Bash/Shell
+  -- "bashls", -- Bash/Shell
   "clangd", -- clangd for C/C++
   -- "jsonls", -- JSON
   "lua_ls", -- Lua
   -- "rust_analyser", -- Rust
   -- "zls", -- Zig
-  -- "yamlls",
+  -- "yamlls", -- YAML
 })
 
 if vim.g.lsp_on_demands then
