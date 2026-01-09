@@ -23,7 +23,14 @@ vim.api.nvim_create_autocmd("InsertEnter", {
   once = true,
   callback = function()
     require("blink.cmp").setup({
-      keymap = { preset = "super-tab" },
+      keymap = { 
+        preset = "super-tab",
+        ["<CR>"] = { "select_and_accept", "fallback" },
+        -- Optional: Add standard navigation keys
+        ["<C-n>"] = { "select_next" },
+        ["<C-p>"] = { "select_prev" },
+        ["<C-y>"] = { "select_and_accept", "fallback" },
+      },
       appearance = {
         nerd_font_variant = "mono",
         use_nvim_cmp_as_default = true,
@@ -44,6 +51,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
   end,
 })
 
+
 -- Load treesitter
 --
 --
@@ -56,8 +64,13 @@ require("plugins.which-key")
 
 -- NvimTree
 -- Add autocmds to highlight file in explorer when a new buffer is opened/switched to
--- Configure static buffer window / element on left
+-- TODO: Configure static buffer window / element on left
+require("plugins.nvim-tree")
 
 
 -- fzf-lua
+require("plugins.fzf-lua")
+
+
+
 
